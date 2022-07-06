@@ -16,17 +16,22 @@ class Snake:
         self.create_snake()
         self.head = self.segments[0]
 
-
     def create_snake(self):
         for position in STARTING_POSITION:
-            new_segment = Turtle(shape="square")
-            new_segment.penup()
-            new_segment.color("white")
-            new_segment.goto(position)
-            self.segments.append(new_segment)
+            self.add_segment(position)
 
+    def add_segment(self, position):
+        new_segment = Turtle(shape="square")
+        new_segment.penup()
+        new_segment.color("white")
+        new_segment.goto(position)
+        self.segments.append(new_segment)
+
+    def extend(self):
+        self.add_segment(self.segments[-1].position())
 
     # 앞쪽의 블록의 좌표로 이동하게 해서 맨앞의 방향이 틀어져도 따라 갈 수 있게 만든다
+
     def move(self):
         for seg_num in range(len(self.segments) - 1, 0, -1):
             new_x = self.segments[seg_num - 1].xcor()
