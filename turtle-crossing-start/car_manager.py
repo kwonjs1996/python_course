@@ -12,6 +12,9 @@ class CarManager(Turtle):
         self.cars = []
 
     def create_car(self):
+        # random 을 이용해 1/6 확률로 create_car() 실행시키기
+        random_chance = random.randint(1, 6)
+        # if random_chance == 1:
         new_car = Turtle(shape="square")
         new_car.turtlesize(1, 2)
         new_car.penup()
