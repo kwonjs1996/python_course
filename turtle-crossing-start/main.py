@@ -8,7 +8,7 @@ screen = Screen()
 screen.setup(width=600, height=600)
 player = Player()
 car_manager = CarManager()
-결scoreboard = Scoreboard()
+scoreboard = Scoreboard()
 screen.tracer(0)
 screen.listen()
 

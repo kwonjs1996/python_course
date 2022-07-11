@@ -37,15 +37,17 @@ while game_is_on:
 
     #Detect collision with wall (벽에 뱀이 부딪히는 상황)
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 295 or snake.head.ycor() < -280:
-        game_is_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
+
     # Detect collision with tail. (꼬리나 몸통에 부딪히는걸 감지)
     for segment in snake.segments[1:]:
         # if segment == snake.head:
         #     pass
         if snake.head.distance(segment) < 10:
-            game_is_on = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
+
 
     # if 헤드 세그먼트가 어떤 세그먼트와든 부딪히면
         #게임 오버
