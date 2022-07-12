@@ -11,6 +11,7 @@ states = data.state.to_list()
 x_cor = data.x.to_list()
 y_cor = data.y.to_list()
 lower_states = []
+correct_states = []
 for state in states:
     lower_states.append(state.lower())
 
@@ -27,8 +28,15 @@ score = 0
 
 while True:
     answer_state = screen.textinput(title=f"{score}/50 States Correct", prompt="What's another state's name?").lower()
+    if answer_state == "exit":
+        for i in range(len(correct_states)):
+            states.remove(correct_states[i])
+        new_data = pandas.DataFrame(states)
+        new_data.to_csv("states_to_learn.csv")
+        break
     if answer_state in lower_states or answer_state in states:
         answer_row = data[data.state == answer_state.capitalize()]
+        correct_states.append(answer_state.capitalize())
         answer_x = int(answer_row.x)
         answer_y = int(answer_row.y)
         score += 1
@@ -36,5 +44,6 @@ while True:
         # answer_state = turtle.Turtle()
         # answer_state.penup()
         # answer_state.setpos(answer_x, answer_y)
+    print(correct_states)
 
-screen.exitonclick()
+print(states)
