@@ -25,7 +25,30 @@ data = pandas.read_csv("nato_phonetic_alphabet.csv")
 phonetic_dict = {row.letter:row.code for (index, row) in data.iterrows()}
 # print(phonetic_dict)
 
-word = input("word: ").upper()
-output_list = [phonetic_dict[letter] for letter in word]
-print(output_list)
+# 예외처리, 유효성검사 (내가 시도한 것)
+# result = True
+# while result:
+#     try:
+#         word = input("word: ").upper()
+#         output_list = [phonetic_dict[letter] for letter in word]
+#         print(output_list)
+#         result = False
+#     except KeyError:
+#         print("Sorry, only letters in the alphabet please.")
+
+
+# 예외처리, 유효성 검사 (강의 내용)
+def generate_phonetic():
+    word = input("word: ").upper()
+    try:
+        output_list = [phonetic_dict[letter] for letter in word]
+    except KeyError:
+        print("Sorry, only letters in the alphabet please.")
+        generate_phonetic()
+    else:
+        print(output_list)
+generate_phonetic()
+
+
+
 
