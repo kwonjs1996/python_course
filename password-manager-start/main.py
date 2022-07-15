@@ -64,6 +64,22 @@ def add():
                 site_input.focus()
 
 
+def search_data():
+    account = site_input.get()
+    try:
+        with open("data.json") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="File not found", message="Please Add Account First")
+    else:
+        if account in data:
+            messagebox.showinfo(title="Account Info", message=f"Website: {account}\nE-mail: "
+                                                          f"{data[account]['email']}\nPassword: {data[account]['password']}")
+        else:
+            messagebox.showinfo(title="Account Not Found", message="No account that website,\nPlease check Website")
+            site_input.delete(0,"end")
+
+
 # ---------------------------- UI SETUP ------------------------------- #
 window = tkinter.Tk()
 window.title("Password Manager")
@@ -83,8 +99,8 @@ email_label.grid(row=2, column=0)
 password_label = tkinter.Label(text="Password")
 password_label.grid(row=3, column=0)
 
-site_input = tkinter.Entry(width=35)
-site_input.grid(row=1, column=1, columnspan=2)
+site_input = tkinter.Entry(width=21)
+site_input.grid(row=1, column=1)
 site_input.focus()
 
 email_input = tkinter.Entry(width=35)
@@ -99,5 +115,8 @@ generate_button.grid(row=3, column=2)
 
 add_button = tkinter.Button(text="Add", width=36, command=add)
 add_button.grid(row=4, column=1, columnspan=2)
+
+search_button = tkinter.Button(text="Search", width=13, command=search_data)
+search_button.grid(row=1, column=2)
 
 window.mainloop()
